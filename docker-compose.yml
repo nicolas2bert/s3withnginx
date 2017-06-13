@@ -1,0 +1,16 @@
+version: '2'
+services:
+  s3server:
+    image: "scality/s3server"
+    environment:
+      - HOST_NAME=s3server
+    ports:
+      - "8000:8000"
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "8080:8080"
+    links:
+      - s3server
